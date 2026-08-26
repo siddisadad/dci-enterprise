@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DCI Enterprise — Presentation</title>
+  <meta name="description" content="DCI Enterprise: the operating platform for Deshmukh Coaching Institute." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650;9..144,720&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #081428;
+      --navy-mid: #0e2a56;
+      --royal: #1d4ed8;
+      --accent: #ff8a15;
+      --gold: #f5c518;
+      --ink: #15233d;
+      --muted: #5c6b82;
+      --line: #dbe3ef;
+      --surface: #f3f6fb;
+      --cream: #f7f4ee;
+      --white: #ffffff;
+      --slide-pad: clamp(1.4rem, 4.4vw, 3.6rem);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; }
+    body {
+      font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+      background: #050c18;
+      color: var(--ink);
+      overflow: hidden;
+    }
+
+    .deck {
+      height: 100%;
+      display: grid;
+      grid-template-rows: 1fr auto;
+    }
+
+    .stage {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: none;
+      padding: var(--slide-pad);
+      background: var(--white);
+    }
+    .slide.active { display: grid; align-content: start; }
+    .slide.dark { background: var(--navy); color: var(--cream); }
+    .slide.cream { background: var(--cream); }
+    .slide.navy-mid { background: linear-gradient(160deg, #081428 0%, #0e2a56 72%, #163a72 100%); color: var(--cream); }
+
+    h1, h2, h3, .display {
+      font-family: Fraunces, Georgia, serif;
+      font-weight: 650;
+      letter-spacing: -0.03em;
+      margin: 0;
+    }
+    p { margin: 0; line-height: 1.5; }
+    .kicker {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .slide.dark .kicker, .slide.navy-mid .kicker { color: var(--gold); }
+    .lede { font-size: clamp(1rem, 1.8vw, 1.25rem); color: var(--muted); max-width: 52rem; }
+    .slide.dark .lede, .slide.navy-mid .lede { color: rgba(247, 244, 238, 0.72); }
+
+    .eyebrow-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 1.1rem;
+    }
+    .brand-mark {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .slide.dark .brand-mark, .slide.navy-mid .brand-mark { color: rgba(247, 244, 238, 0.5); }
+
+    .title-xl { font-size: clamp(2.4rem, 6.2vw, 5.4rem); line-height: 0.95; }
+    .title-lg { font-size: clamp(1.9rem, 3.8vw, 3.2rem); line-height: 1.05; }
+    .title-md { font-size: clamp(1.45rem, 2.6vw, 2.15rem); line-height: 1.12; }
+
+    .grid-2 { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: clamp(1rem, 3vw, 2.4rem); }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.9rem; }
+    .stack { display: grid; gap: 0.85rem; }
+
+    .card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 1.05rem 1.15rem;
+    }
+    .card h3 { font-size: 1.12rem; margin-bottom: 0.35rem; }
+    .card p, .card li { color: var(--muted); font-size: 0.92rem; }
+    .card.ink { background: var(--navy); color: var(--cream); border-color: transparent; }
+    .card.ink p, .card.ink li { color: rgba(247, 244, 238, 0.74); }
+    .card.tint { background: #fff7ed; border-color: #ffd7a8; }
+    .num {
+      font-family: Fraunces, serif;
+      font-size: 1.7rem;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 0.45rem;
+    }
+
+    ul.clean { margin: 0; padding: 0; list-style: none; display: grid; gap: 0.55rem; }
+    ul.clean li {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.65rem;
+      align-items: start;
+      font-size: 0.98rem;
+    }
+    ul.clean li::before {
+      content: "";
+      width: 0.55rem;
+      height: 0.55rem;
+      margin-top: 0.42rem;
+      border-radius: 99px;
+      background: var(--accent);
+    }
+
+    .chips { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+    .chip {
+      border: 1px solid var(--line);
+      background: var(--white);
+      border-radius: 999px;
+      padding: 0.35rem 0.7rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--ink);
+    }
+    .chip.gold { background: var(--gold); border-color: transparent; color: var(--navy); }
+
+    .stat {
+      padding: 0.2rem 0 0.6rem;
+      border-bottom: 1px solid rgba(247, 244, 238, 0.14);
+    }
+    .stat strong {
+      display: block;
+      font-family: Fraunces, serif;
+      font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+      line-height: 1;
+    }
+    .stat span { color: rgba(247, 244, 238, 0.62); font-size: 0.86rem; }
+
+    .compare {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .compare .col { border-radius: 20px; padding: 1.2rem 1.3rem; }
+    .compare .now { background: #fff1f0; border: 1px solid #ffc9c4; }
+    .compare .next { background: #edf8f1; border: 1px solid #b7e4c7; }
+    .compare h3 { margin-bottom: 0.7rem; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+    }
+    th, td {
+      text-align: left;
+      padding: 0.72rem 0.6rem;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+    }
+    th { color: var(--muted); font-size: 0.74rem; letter-spacing: 0.08em; text-transform: uppercase; }
+    td strong { display: block; }
+
+    .layers { display: grid; gap: 0.55rem; }
+    .layer {
+      display: grid;
+      grid-template-columns: 9rem 1fr;
+      gap: 1rem;
+      align-items: center;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px;
+      padding: 0.8rem 1rem;
+    }
+    .layer b { color: var(--gold); font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase; }
+    .layer span { color: rgba(247, 244, 238, 0.82); font-size: 0.95rem; }
+
+    .roadmap { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .roadmap article { border-top: 4px solid var(--accent); padding-top: 0.85rem; }
+    .roadmap h3 { margin-bottom: 0.45rem; }
+    .roadmap p { color: var(--muted); font-size: 0.92rem; }
+
+    footer.chrome {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.55rem 0.9rem 0.7rem;
+      background: #050c18;
+      color: rgba(247, 244, 238, 0.7);
+      font-size: 0.78rem;
+    }
+    .progress {
+      flex: 1;
+      height: 4px;
+      background: rgba(255,255,255,0.12);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .progress > span {
+      display: block;
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, var(--accent), var(--gold));
+    }
+    .nav-btns { display: flex; gap: 0.4rem; }
+    button.nav {
+      background: #122036;
+      color: var(--cream);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 10px;
+      padding: 0.38rem 0.7rem;
+      cursor: pointer;
+      font: inherit;
+    }
+    button.nav:hover { background: #1b314e; }
+
+    .help {
+      position: absolute;
+      right: 1rem;
+      bottom: 3.2rem;
+      background: rgba(8, 20, 40, 0.92);
+      color: var(--cream);
+      border-radius: 12px;
+      padding: 0.7rem 0.85rem;
+      font-size: 0.75rem;
+      display: none;
+      z-index: 5;
+    }
+    .help.show { display: block; }
+    kbd {
+      background: rgba(255,255,255,0.12);
+      border-radius: 5px;
+      padding: 0.05rem 0.35rem;
+      font-size: 0.72rem;
+    }
+
+    @media (max-width: 900px) {
+      .grid-2, .grid-3, .grid-4, .compare, .roadmap, .layer { grid-template-columns: 1fr; }
+      .slide { overflow: auto; }
+    }
+
+    @media print {
+      body { overflow: visible; background: white; }
+      .deck { display: block; }
+      footer.chrome, .help { display: none !important; }
+      .slide {
+        position: relative;
+        display: grid !important;
+        page-break-after: always;
+        min-height: 100vh;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="deck">
+    <div class="stage" id="stage">
+
+      <section class="slide navy-mid active" data-title="Title">
+        <div class="eyebrow-row">
+          <span class="brand-mark">Deshmukh Coaching Institute</span>
+          <span class="brand-mark">Confidential · Leadership deck</span>
+        </div>
+        <p class="kicker">DCI Enterprise</p>
+        <h1 class="title-xl" style="margin: 0.4rem 0 1.1rem; max-width: 16ch;">The operating system for the institute.</h1>
+        <p class="lede">One platform for classrooms, academics, staff, students, and parents — so Deshmukh Coaching Institute can run with the same discipline it teaches.</p>
+        <div class="chips" style="margin-top: 1.6rem;">
+          <span class="chip gold">Learn. Prepare. Achieve.</span>
+          <span class="chip">School · Board · Competitive</span>
+          <span class="chip">Director · Admin · Teacher · Student</span>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Agenda">
+        <div class="eyebrow-row">
+          <span class="kicker">01 · Agenda</span>
+          <span class="brand-mark">12 minutes</span>
+        </div>
+        <h2 class="title-lg" style="margin-bottom: 1.4rem;">What we will align on today.</h2>
+        <div class="grid-2">
+          <ol class="stack" style="margin: 0; padding-left: 1.2rem; font-size: 1.15rem; line-height: 1.7;">
+            <li>The institute we are building for</li>
+            <li>The operational gap paper and WhatsApp cannot close</li>
+            <li>What DCI Enterprise is — and is not</li>
+            <li>The product: classroom, academics, people, trust</li>
+            <li>How it is built, and what we do next</li>
+          </ol>
+          <aside class="card tint">
+            <p class="kicker" style="margin-bottom: 0.5rem;">Decision asked</p>
+            <h3>Treat this as the institute’s system of record</h3>
+            <p>Not another app alongside registers. The source of attendance, marks, homework, staff access, and parent communication.</p>
+          </aside>
+        </div>
+      </section>
+
+      <section class="slide dark" data-title="The institute">
+        <div class="eyebrow-row">
+          <span class="kicker">02 · Context</span>
+          <span class="brand-mark">Deshmukh Coaching Institute</span>
+        </div>
+        <div class="grid-2">
+          <div>
+            <h2 class="title-lg" style="margin-bottom: 0.8rem;">A results-first coaching brand, now needing an operations backbone.</h2>
+            <p class="lede">DCI coaches school academics, board examinations, foundation, and competitive pathways. The public promise is personal attention, regular tests, and guidance that converts effort into marks.</p>
+            <div class="chips" style="margin-top: 1.2rem;">
+              <span class="chip">Classes 5–12</span>
+              <span class="chip">Maths · Science · English</span>
+              <span class="chip">Board pattern mocks</span>
+              <span class="chip">Doubt support</span>
+              <span class="chip">Career counselling</span>
+            </div>
+          </div>
+          <div class="stack">
+            <div class="stat"><strong>2016</strong><span>Institute founding year on the public site</span></div>
+            <div class="stat"><strong>4 programmes</strong><span>School, board, competitive, foundation</span></div>
+            <div class="stat"><strong>4 roles</strong><span>Director, admin, teacher, student already modelled in software</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide cream" data-title="The gap">
+        <div class="eyebrow-row">
+          <span class="kicker">03 · The problem</span>
+          <span class="brand-mark">Why software now</span>
+        </div>
+        <h2 class="title-lg" style="margin-bottom: 1.1rem;">Good teaching is already happening. The record of it is not.</h2>
+        <div class="compare">
+          <div class="col now">
+            <h3>How institutes typically run</h3>
+            <ul class="clean">
+              <li>Attendance in paper registers or personal spreadsheets</li>
+              <li>Marks trapped in one teacher’s notebook</li>
+              <li>Homework announced once, then lost in a group chat</li>
+              <li>Parents hear updates late, or not at all</li>
+              <li>No audit trail when a mark or role is changed</li>
+            </ul>
+          </div>
+          <div class="col next">
+            <h3>What DCI Enterprise makes normal</h3>
+            <ul class="clean">
+              <li>Live attendance by class, with history and reports</li>
+              <li>Exams, marks, and PDF report cards from one ledger</li>
+              <li>Homework assigned, tracked, and visible to the student</li>
+              <li>WhatsApp messages from the institute, not from ten phones</li>
+              <li>Roles enforced in the product and in the database</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" data-title="What it is">
+        <div class="eyebrow-row">
+          <span class="kicker">04 · Definition</span>
+          <span class="brand-mark">DCI Enterprise</span>
+        </div>
+        <h2 class="title-lg" style="max-width: 22ch; margin-bottom: 1rem;">The digital campus of Deshmukh Coaching Institute.</h2>
+        <p class="lede" style="margin-bottom: 1.3rem;">A role-based operations platform: Flutter client, Firebase backend, Cloud Functions for privileged actions, and a public Next.js website for admissions. Built so a director in Degloor can see the institute the same way a teacher sees a class.</p>
+        <div class="grid-4">
+          <article class="card"><div class="num">01</div><h3>Classroom</h3><p>Attendance, daily reports, homework, assigned classes.</p></article>
+          <article class="card"><div class="num">02</div><h3>Academics</h3><p>Exams, marks, comparative results, PDF report cards, Excel import.</p></article>
+          <article class="card"><div class="num">03</div><h3>People</h3><p>Faculty, students, invitations, profiles, staff analytics.</p></article>
+          <article class="card ink"><div class="num">04</div><h3>Trust</h3><p>RBAC, blocked public sign-up, audit logs, privacy policy, WhatsApp via server.</p></article>
+        </div>
+      </section>
+
+      <section class="slide dark" data-title="Product map">
+        <div class="eyebrow-row">
+          <span class="kicker">05 · Product map</span>
+          <span class="brand-mark">One campus, four surfaces</span>
+        </div>
+        <h2 class="title-md" style="margin-bottom: 1.1rem;">Every user lands in the same system. The view is different.</h2>
+        <div class="grid-2">
+          <div class="stack">
+            <div class="layer"><b>Director</b><span>Institute-wide students, faculty, settings, audit, analytics</span></div>
+            <div class="layer"><b>Admin</b><span>Day-to-day operations: users, students, exams, limited settings</span></div>
+            <div class="layer"><b>Teacher</b><span>Assigned classes only — attendance, marks, homework, daily report</span></div>
+            <div class="layer"><b>Student</b><span>Own record, class exams, own results, own homework</span></div>
+          </div>
+          <div class="card" style="background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.1); color: var(--cream);">
+            <h3 style="margin-bottom: 0.5rem;">Teacher rule that matters</h3>
+            <p style="color: rgba(247,244,238,0.75);">If a teacher has assigned classes, they only see those students. An empty assignment list keeps a broader view. Roles and assigned classes live on the Auth token — users cannot rewrite their own role in Firestore.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Classroom">
+        <div class="eyebrow-row">
+          <span class="kicker">06 · Classroom operations</span>
+          <span class="brand-mark">The daily loop</span>
+        </div>
+        <h2 class="title-lg" style="margin-bottom: 1rem;">The 8:00 a.m. to 8:00 p.m. institute, captured once.</h2>
+        <div class="grid-3">
+          <article class="card">
+            <h3>Attendance</h3>
+            <p>Tracker, dashboard, history, and reports. Teachers mark the class they own. Students can see their own history.</p>
+          </article>
+          <article class="card">
+            <h3>Homework</h3>
+            <p>Assign, dashboard, history. Students open “My homework” instead of hunting through a chat thread.</p>
+          </article>
+          <article class="card">
+            <h3>Daily report</h3>
+            <p>A structured close-of-day note from the teacher — what was taught, who struggled, what to revise — stored, not forgotten.</p>
+          </article>
+        </div>
+        <p class="lede" style="margin-top: 1.2rem;">This is the difference between “we take attendance” and “the director can see who was present, in which batch, last Thursday.”</p>
+      </section>
+
+      <section class="slide cream" data-title="Academics">
+        <div class="eyebrow-row">
+          <span class="kicker">07 · Academic engine</span>
+          <span class="brand-mark">Tests → marks → parents</span>
+        </div>
+        <h2 class="title-lg" style="margin-bottom: 1rem;">Exams are not an event. They are a ledger.</h2>
+        <div class="grid-2">
+          <ul class="clean">
+            <li>Exam setup and a dedicated exams dashboard</li>
+            <li>Marks entry by teachers on assigned classes</li>
+            <li>Results and comparative views for leadership</li>
+            <li>PDF report cards generated from live data</li>
+            <li>Excel import and export so existing sheets are not a dead end</li>
+          </ul>
+          <aside class="card ink">
+            <p class="kicker" style="margin-bottom: 0.45rem;">Why this is enterprise</p>
+            <h3>A mark, once entered, is institute property</h3>
+            <p>Not a screenshot in a group. Not a file on a laptop. The same number the student sees, the parent can be sent, and the director can trend.</p>
+          </aside>
+        </div>
+      </section>
+
+      <section class="slide" data-title="People">
+        <div class="eyebrow-row">
+          <span class="kicker">08 · People &amp; access</span>
+          <span class="brand-mark">RBAC</span>
+        </div>
+        <h2 class="title-md" style="margin-bottom: 0.9rem;">Four roles. Clear edges. No public sign-up.</h2>
+        <table>
+          <thead>
+            <tr><th>Role</th><th>Students</th><th>Exams</th><th>Faculty</th><th>Settings</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Director</strong></td>
+              <td>Manage</td>
+              <td>Manage</td>
+              <td>Manage (cannot create Admins)</td>
+              <td>Full</td>
+            </tr>
+            <tr>
+              <td><strong>Admin</strong></td>
+              <td>Manage</td>
+              <td>Manage</td>
+              <td>Manage</td>
+              <td>Limited</td>
+            </tr>
+            <tr>
+              <td><strong>Teacher</strong></td>
+              <td>Assigned classes · attendance · marks</td>
+              <td>Enter marks</td>
+              <td>Own profile</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td><strong>Student</strong></td>
+              <td>Own record only</td>
+              <td>Own class exams / results</td>
+              <td>—</td>
+              <td>—</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="lede" style="margin-top: 1rem;">Staff accounts are created through a Cloud Function with a pending invite. Random email sign-up is blocked.</p>
+      </section>
+
+      <section class="slide dark" data-title="Parents">
+        <div class="eyebrow-row">
+          <span class="kicker">09 · Communication</span>
+          <span class="brand-mark">WhatsApp is the parent portal</span>
+        </div>
+        <div class="grid-2">
+          <div>
+            <h2 class="title-lg" style="margin-bottom: 0.8rem;">Parents already live in WhatsApp. The institute should too — on purpose.</h2>
+            <p class="lede">Device share via wa.me still works for a quick personal ping. Official Cloud API sends go through a server function, with tokens kept off the phone.</p>
+          </div>
+          <ul class="clean">
+            <li>Announcements feed inside the app</li>
+            <li>Push notifications for staff and students</li>
+            <li>WhatsApp Cloud API callable: <em>sendWhatsAppMessage</em></li>
+            <li>Public website enquiry path for admissions counselling</li>
+            <li>One number, one voice, one audit path</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Trust">
+        <div class="eyebrow-row">
+          <span class="kicker">10 · Trust</span>
+          <span class="brand-mark">Security is a product feature</span>
+        </div>
+        <h2 class="title-lg" style="margin-bottom: 1rem;">If a student record leaks, the brand leaks with it.</h2>
+        <div class="grid-3">
+          <article class="card">
+            <h3>Enforced in the database</h3>
+            <p>Firestore and Storage rules ship with the app. Users cannot change their own role or assigned classes from the client.</p>
+          </article>
+          <article class="card">
+            <h3>Privileged work on the server</h3>
+            <p>Creating staff and sending WhatsApp Cloud messages are Cloud Functions. Secrets stay in the function environment.</p>
+          </article>
+          <article class="card">
+            <h3>Audit and privacy</h3>
+            <p>Administrative actions log through AuditRepository. Privacy policy and terms sit on the public site before launch.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="slide navy-mid" data-title="Architecture">
+        <div class="eyebrow-row">
+          <span class="kicker">11 · How it is built</span>
+          <span class="brand-mark">Already in code, not a slide-only vision</span>
+        </div>
+        <h2 class="title-md" style="margin-bottom: 1rem;">Layered, feature-first, production-minded.</h2>
+        <div class="layers">
+          <div class="layer"><b>Public web</b><span>Next.js + TypeScript site — courses, faculty, results, enquiry form</span></div>
+          <div class="layer"><b>Campus app</b><span>Flutter, Riverpod, responsive scaffold (phone bottom nav / tablet sidebar)</span></div>
+          <div class="layer"><b>Domain</b><span>Attendance, exams, homework, daily report, student repositories</span></div>
+          <div class="layer"><b>Backend</b><span>Firebase Auth, Firestore, Storage, Messaging, Cloud Functions (Blaze)</span></div>
+          <div class="layer"><b>Release</b><span>GitHub Actions → signed AAB → Firebase App Distribution → Play closed testing → tagged production</span></div>
+        </div>
+      </section>
+
+      <section class="slide cream" data-title="Outcomes">
+        <div class="eyebrow-row">
+          <span class="kicker">12 · What changes</span>
+          <span class="brand-mark">Institute outcomes</span>
+        </div>
+        <h2 class="title-lg" style="margin-bottom: 1.1rem;">Monday morning, for real people.</h2>
+        <div class="grid-3">
+          <article class="card">
+            <h3>Director</h3>
+            <p>Opens one dashboard instead of calling three teachers. Sees attendance, results, and who has not submitted a daily report.</p>
+          </article>
+          <article class="card">
+            <h3>Teacher</h3>
+            <p>Marks the class, enters scores, assigns homework, writes the daily note — then the phone can go in a pocket.</p>
+          </article>
+          <article class="card">
+            <h3>Parent &amp; student</h3>
+            <p>The student knows the homework. The parent can be told the test score without waiting for the next parent-teacher meeting.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Roadmap">
+        <div class="eyebrow-row">
+          <span class="kicker">13 · Next</span>
+          <span class="brand-mark">Operate, then extend</span>
+        </div>
+        <h2 class="title-lg" style="margin-bottom: 1.1rem;">Do not add features until the ledger is lived-in.</h2>
+        <div class="roadmap">
+          <article>
+            <p class="kicker">Now</p>
+            <h3>Run the campus on it</h3>
+            <p>Deploy rules and functions. Invite real staff. Backfill claims. One batch as the pilot: attendance + one exam cycle + WhatsApp to parents.</p>
+          </article>
+          <article>
+            <p class="kicker">Next</p>
+            <h3>Connect admissions</h3>
+            <p>Wire the public enquiry form to the same student record. Replace placeholder site copy with verified faculty, results, and address.</p>
+          </article>
+          <article>
+            <p class="kicker">Then</p>
+            <h3>Fees, timetable, multi-branch</h3>
+            <p>Only after the first campus trusts the data. Enterprise means one more centre can be added without inventing a new process.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="slide navy-mid" data-title="Close">
+        <div class="eyebrow-row">
+          <span class="brand-mark">Deshmukh Coaching Institute</span>
+          <span class="brand-mark">DCI Enterprise</span>
+        </div>
+        <p class="kicker">Close</p>
+        <h2 class="title-xl" style="margin: 0.35rem 0 1rem; max-width: 18ch;">Teach with care. Operate with a ledger.</h2>
+        <p class="lede">The brand is Learn. Prepare. Achieve. The platform is how the institute keeps that promise on a Tuesday in July, not only on result day.</p>
+        <div class="chips" style="margin-top: 1.8rem;">
+          <span class="chip gold">Adopt as system of record</span>
+          <span class="chip">Pilot one batch this term</span>
+          <span class="chip">Director sign-off on roles &amp; WhatsApp</span>
+        </div>
+      </section>
+    </div>
+
+    <footer class="chrome">
+      <span id="counter">1 / 14</span>
+      <div class="progress" aria-hidden="true"><span id="bar"></span></div>
+      <div class="nav-btns">
+        <button class="nav" type="button" id="prev" aria-label="Previous slide">Prev</button>
+        <button class="nav" type="button" id="next" aria-label="Next slide">Next</button>
+        <button class="nav" type="button" id="helpBtn" aria-label="Keyboard shortcuts">Keys</button>
+      </div>
+    </footer>
+    <div class="help" id="help">
+      <div><kbd>←</kbd> <kbd>→</kbd> or <kbd>Space</kbd> move slides</div>
+      <div><kbd>Home</kbd> / <kbd>End</kbd> first / last</div>
+      <div><kbd>F</kbd> fullscreen · <kbd>?</kbd> this panel</div>
+    </div>
+  </div>
+  <script>
+    const slides = [...document.querySelectorAll(".slide")];
+    const counter = document.getElementById("counter");
+    const bar = document.getElementById("bar");
+    const help = document.getElementById("help");
+    let i = Math.max(0, parseInt(location.hash.replace("#", ""), 10) - 1 || 0);
+
+    function show(n) {
+      i = (n + slides.length) % slides.length;
+      slides.forEach((s, idx) => s.classList.toggle("active", idx === i));
+      counter.textContent = i + 1 + " / " + slides.length;
+      bar.style.width = ((i + 1) / slides.length) * 100 + "%";
+      history.replaceState(null, "", "#" + (i + 1));
+      document.title = slides[i].dataset.title + " · DCI Enterprise";
+    }
+
+    document.getElementById("prev").onclick = () => show(i - 1);
+    document.getElementById("next").onclick = () => show(i + 1);
+    document.getElementById("helpBtn").onclick = () => help.classList.toggle("show");
+
+    window.addEventListener("keydown", (e) => {
+      if (["ArrowRight", "PageDown", " ", "Enter"].includes(e.key)) { e.preventDefault(); show(i + 1); }
+      if (["ArrowLeft", "PageUp", "Backspace"].includes(e.key)) { e.preventDefault(); show(i - 1); }
+      if (e.key === "Home") show(0);
+      if (e.key === "End") show(slides.length - 1);
+      if (e.key === "f" || e.key === "F") document.documentElement.requestFullscreen?.();
+      if (e.key === "?" || e.key === "h") help.classList.toggle("show");
+    });
+
+    show(i);
+  </script>
+</body>
+</html>
