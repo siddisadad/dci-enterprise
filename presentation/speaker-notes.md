@@ -1,6 +1,6 @@
 # DCI Enterprise — speaker notes
 
-Use with `presentation/index.html`. Target length: about 12 minutes. Pause after slides 4, 8, and 13 for questions.
+Use with `presentation/index.html`. Target length: about 12 minutes. Pause after slides 4, 8, and 14 for questions.
 
 ## 1 — Title
 
@@ -50,10 +50,14 @@ If a Class 10 mark sheet leaks, the brand leaks. Rules, functions, audit log, pr
 
 This is not a mock. Flutter + Firebase + Next.js site + Play pipeline already exist in the DCI repos. Enterprise is the operating decision, not a greenfield rewrite.
 
-## 13 — Roadmap
+## 13 — Outcomes
+
+Walk Director, Teacher, Parent in that order. Keep it concrete: last Thursday’s attendance, not a vision statement.
+
+## 14 — Roadmap
 
 Resist fees and multi-branch until one batch has lived a full exam cycle on the platform.
 
-## 14 — Close
+## 15 — Close
 
 Ask for: (1) system-of-record decision, (2) pilot batch, (3) director sign-off on roles and WhatsApp.

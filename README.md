@@ -4,7 +4,7 @@ Leadership presentation for **Deshmukh Coaching Institute** — the digital oper
 
 ## Open the deck
 
-Open [`presentation/index.html`](presentation/index.html) in a browser. No build step.
+Open [`presentation/index.html`](presentation/index.html) in a browser. **15 slides**, no build step.
 
 | Key | Action |
 | --- | --- |
